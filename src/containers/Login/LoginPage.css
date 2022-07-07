@@ -1,0 +1,22 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  width: 50%;
+  padding-top: 20vh !important;
+}
+
+.form.ant-form-horizontal {
+  position: absolute;
+  margin-left: -10%;
+}
+
+.logo {
+  position: absolute;
+  top: 5vh;
+  width: 180px;
+}
