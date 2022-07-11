@@ -35,15 +35,31 @@ export const client = (token) =>
     },
   });
 
-export const convertDate = (date) => {
+export const convertDate = (date, type) => {
   const d = new Date(date);
   let month = "" + (d.getMonth() + 1);
   let day = "" + d.getDate();
   let year = d.getFullYear();
+  const monthName = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
 
   if (month.length < 2) month = "0" + month;
   if (day.length < 2) day = "0" + day;
-
+  if (type) {
+    return [day, monthName[d.getMonth()], year].join(" ");
+  }
   return [day, month, year].join("-");
 };
 

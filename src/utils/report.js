@@ -14,6 +14,13 @@ export async function postReport(data) {
     .catch((err) => console.log(err.response));
 }
 
+export async function updateReport(id, data) {
+  return client()
+    .put(`abberation/${id}`, { ...data })
+    .then((res) => res.data)
+    .catch((err) => console.log(err.response));
+}
+
 export async function deleteReport(id) {
   return client()
     .delete(`abberation/${id}`)

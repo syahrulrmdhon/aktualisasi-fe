@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import message from "antd/es/message";
+import Select from "antd/es/select";
+import Tabs from "antd/es/tabs";
 import Navbar from "../../components/Navbar";
 import TableAbberation from "../../components/TableAbberation";
 import { getListReport, deleteReport } from "../../utils/report";
@@ -8,9 +10,16 @@ import { getListReport, deleteReport } from "../../utils/report";
 const HomePage = () => {
   const [dataReport, setDataReport] = useState([]);
   const [loadingReport, setLoadingReport] = useState(false);
+  const [year, setYear] = useState({
+    value: new Date().getFullYear(),
+    label: new Date().getFullYear(),
+  });
+  const [group, setGroup] = useState("pb");
   const history = useNavigate();
-  const getDataReport = async () => {
-    const params = {};
+  const { TabPane } = Tabs;
+  const { Option } = Select;
+  const getDataReport = async ({ year, group }) => {
+    const params = { year: year || new Date().getFullYear(), group: group };
     setLoadingReport(true);
     const res = await getListReport(params);
     if (res) {
@@ -21,15 +30,25 @@ const HomePage = () => {
   const deleteDataReport = async (id) => {
     const res = await deleteReport(id);
     if (res) {
-      console.log(res)
       setDataReport(dataReport.filter((e) => e.id !== id));
       message.success(res.message);
     }
   };
 
+  const handleChange = (e) => {
+    setYear({ label: e, value: e });
+    getDataReport({ year: e, group: group });
+  };
+
+  const onTabChange = (e) => {
+    setGroup(e);
+    getDataReport({ year: year.label, group: e });
+  };
+
   useEffect(() => {
-    getDataReport();
+    getDataReport({ year: year.label, group: group });
   }, []);
+
   return (
     <>
       <Navbar />
@@ -40,27 +59,70 @@ const HomePage = () => {
               className="col-lg-12 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
               data-aos="fade-up"
             >
-              <div>
-                <h2>Daftar Penyimpangan {new Date().getFullYear()}</h2>
-                <button
-                  onClick={() => history("/add-report")}
-                  className="btn btn-primary"
-                >
-                  Buat Laporan
-                </button>
+              <div className="row">
+                <div className="col-md-6">
+                  <h2>Daftar Penyimpangan {year.label}</h2>
+                  <button
+                    onClick={() => history(`/add-report/${group}`)}
+                    className="btn btn-primary"
+                  >
+                    Buat Laporan
+                  </button>
+                </div>
+                <div className="col-md-6" style={{ textAlign: "end" }}>
+                  <h2></h2>
+                  <Select
+                    size="large"
+                    onChange={handleChange}
+                    style={{
+                      width: 200,
+                    }}
+                    defaultValue={year}
+                  >
+                    <Option value={new Date().getFullYear() - 1}>
+                      {new Date().getFullYear() - 1}
+                    </Option>
+                    <Option value={new Date().getFullYear()}>
+                      {new Date().getFullYear()}
+                    </Option>
+                  </Select>
+                </div>
               </div>
-              <TableAbberation
-                dataReport={dataReport}
-                loadingReport={loadingReport}
-                deleteDataReport={deleteDataReport}
-              />
+              <Tabs defaultActiveKey="pb" onChange={onTabChange}>
+                <TabPane tab="Produk Biologi" key="pb">
+                  <TableAbberation
+                    dataReport={dataReport}
+                    loadingReport={loadingReport}
+                    deleteDataReport={deleteDataReport}
+                    group={group}
+                  />
+                </TabPane>
+                <TabPane tab="Obat" key="ob">
+                  <TableAbberation
+                    dataReport={dataReport}
+                    loadingReport={loadingReport}
+                    deleteDataReport={deleteDataReport}
+                    group={group}
+                  />
+                </TabPane>
+                <TabPane tab="Bahan Baku Obat" key="bbo">
+                  <TableAbberation
+                    dataReport={dataReport}
+                    loadingReport={loadingReport}
+                    deleteDataReport={deleteDataReport}
+                    group={group}
+                  />
+                </TabPane>
+                <TabPane tab="Impor dan Ekspor" key="ie">
+                  <TableAbberation
+                    dataReport={dataReport}
+                    loadingReport={loadingReport}
+                    deleteDataReport={deleteDataReport}
+                    group={group}
+                  />
+                </TabPane>
+              </Tabs>
             </div>
-            {/* <div
-              className="col-lg-3 order-1 order-lg-2 hero-img"
-              data-aos="fade-left"
-            >
-              <img src={heroImage} className="img-fluid" alt="" />
-            </div> */}
           </div>
         </div>
       </section>

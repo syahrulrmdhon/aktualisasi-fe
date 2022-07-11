@@ -5,8 +5,7 @@ import { DatePicker, message } from "antd";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import CanvasSignature from "react-signature-canvas";
-import { postReport, getReport } from "../../utils/report";
-import { isObjectEmpty } from "../../utils";
+import { postReport, getReport, updateReport } from "../../utils/report";
 
 const Signature = React.forwardRef((props, ref) => (
   <CanvasSignature
@@ -24,7 +23,7 @@ const CreateReport = () => {
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [dataDetail, setDataDetail] = useState({});
   const history = useNavigate();
-  const { id: idReport } = useParams();
+  const { id: idReport, group } = useParams();
 
   const [initial, setInitial] = useState({
     signature_reporter: dataDetail.signature_reporter || null,
@@ -38,7 +37,6 @@ const CreateReport = () => {
     bussiness_process: dataDetail.bussiness_process || "",
     facility_name: dataDetail.facility_name || "",
   });
-  console.log("initial: ", initial);
 
   const getDataReport = async (idReport) => {
     const res = await getReport(idReport);
@@ -67,10 +65,27 @@ const CreateReport = () => {
 
   const postDataReport = async (postData) => {
     setLoadingSubmit(true);
-    let store = await postReport(postData);
+    const dataPost = {
+      date_signature_reporter: new Date().toISOString().split("T")[0],
+      surveillance_group: group,
+      ...postData,
+    };
+    let store = await postReport(dataPost);
     if (store.status === 200) {
       setLoadingSubmit(false);
       message.success(store.statusText);
+      history("/");
+    } else {
+      setLoadingSubmit(false);
+      message.error("I'm sorry, there was an error");
+    }
+  };
+
+  const updateDataReport = async (idReport, postData) => {
+    let store = await updateReport(idReport, postData);
+    if (store) {
+      setLoadingSubmit(false);
+      message.success(store.message);
       history("/");
     } else {
       setLoadingSubmit(false);
@@ -98,11 +113,17 @@ const CreateReport = () => {
                   enableReinitialize
                   initialValues={initial}
                   onSubmit={(values) => {
-                    const current = refState.getTrimmedCanvas();
-                    const data = current.toDataURL();
-                    const postData = { ...values, signature_reporter: data };
-                    setState({ ...postData });
-                    postDataReport(postData);
+                    if (idReport) {
+                      const postData = { ...values };
+                      setState({ ...postData });
+                      updateDataReport(idReport, postData);
+                    } else {
+                      const current = refState.getTrimmedCanvas();
+                      const data = current.toDataURL();
+                      const postData = { ...values, signature_reporter: data };
+                      setState({ ...postData });
+                      postDataReport(postData);
+                    }
                   }}
                 >
                   {({ values, errors, touched, handleSubmit, setValues }) => (
@@ -277,46 +298,50 @@ const CreateReport = () => {
                           }
                         ></textarea>
                       </div>
-                      <p>Tanda Tangan Pelapor</p>
-                      <label
-                        htmlFor="signature_reporter"
-                        style={{
-                          border: "1px solid #576971",
-                          cursor: "crosshair",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        <Field
-                          name="signature_reporter"
-                          style={{ border: "1px solid black" }}
-                          onMouseUp={(e) => {
-                            setValues({
-                              ...values,
-                              [e.target.name]: e.target.toDataURL(),
-                            });
-                            console.log({ e });
-                          }}
-                        >
-                          {(props) => (
-                            <>
-                              <Signature
-                                {...props}
-                                ref={(ref) => {
-                                  setRefState(ref);
-                                  return ref;
-                                }}
-                              />
-                            </>
-                          )}
-                        </Field>
-                      </label>
-                      <div
-                        className="text-primary"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => refState.clear()}
-                      >
-                        Clear
-                      </div>
+                      {!values.signature_reporter && (
+                        <>
+                          <p>Tanda Tangan Pelapor</p>
+                          <label
+                            htmlFor="signature_reporter"
+                            style={{
+                              border: "1px solid #576971",
+                              cursor: "crosshair",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            <Field
+                              name="signature_reporter"
+                              style={{ border: "1px solid black" }}
+                              onMouseUp={(e) => {
+                                setValues({
+                                  ...values,
+                                  [e.target.name]: e.target.toDataURL(),
+                                });
+                              }}
+                            >
+                              {(props) => (
+                                <>
+                                  <Signature
+                                    {...props}
+                                    ref={(ref) => {
+                                      setRefState(ref);
+                                      return ref;
+                                    }}
+                                  />
+                                </>
+                              )}
+                            </Field>
+                          </label>
+                          <div
+                            className="text-primary"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => refState.clear()}
+                          >
+                            Clear
+                          </div>
+                        </>
+                      )}
+
                       <br />
                       <button type="submit" className="btn btn-primary">
                         Submit

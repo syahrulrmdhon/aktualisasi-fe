@@ -19,8 +19,8 @@ const Router = () => {
           }
         />
         <Route path="/" element={<HomePage />} />
-        <Route path="/add-report" element={<CreateReport />} />
-        <Route path="/add-report/:id" element={<CreateReport />} />
+        <Route path="/add-report/:group" element={<CreateReport />} />
+        <Route path="/add-report/:group/:id" element={<CreateReport />} />
       </Routes>
     </BrowserRouter>
   );
