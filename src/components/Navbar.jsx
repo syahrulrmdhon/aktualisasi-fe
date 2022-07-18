@@ -8,13 +8,14 @@ const Navbar = () => {
         <div className="logo me-auto w-100" style={{ display: "flex" }}>
           <img className="mx-1" src={logo} alt="logo-bpom" />
           <h1 className="mx-1 mt-2">
-            <a href="">SP3SP</a>
+            <a href="">SIPEPSI</a>
           </h1>
           <p
             className="mx-1"
             style={{ fontFamily: '"Open Sans", sans-serif', color: "#576971" }}
           >
-            Sistem Pencatatan dan Pelaporan Penyimpangan Sarana Produksi
+            <b>Si</b>stem <b>Pe</b>laporan <b>P</b>enyimpangan <b>S</b>arana
+            Produks<b>i</b>
             <br />
             Direktorat Pengawasan Produksi Obat, Narkotika, Psikotropika dan
             Prekursor

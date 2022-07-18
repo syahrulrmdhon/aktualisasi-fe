@@ -4,10 +4,10 @@ import message from "antd/es/message";
 import Select from "antd/es/select";
 import Tabs from "antd/es/tabs";
 import Navbar from "../../components/Navbar";
-import TableAbberation from "../../components/TableAbberation";
+import TableVerification from "../../components/TableVerification";
 import { getListReport, deleteReport } from "../../utils/report";
 
-const HomePage = () => {
+const VerificatorPage = () => {
   const [dataReport, setDataReport] = useState([]);
   const [loadingReport, setLoadingReport] = useState(false);
   const [year, setYear] = useState({
@@ -25,13 +25,6 @@ const HomePage = () => {
     if (res) {
       setDataReport(res);
       setLoadingReport(false);
-    }
-  };
-  const deleteDataReport = async (id) => {
-    const res = await deleteReport(id);
-    if (res) {
-      setDataReport(dataReport.filter((e) => e.id !== id));
-      message.success(res.message);
     }
   };
 
@@ -62,12 +55,6 @@ const HomePage = () => {
               <div className="row">
                 <div className="col-md-6">
                   <h2>Daftar Penyimpangan {year.label}</h2>
-                  <button
-                    onClick={() => history(`/add-report/${group}`)}
-                    className="btn btn-primary"
-                  >
-                    Buat Laporan
-                  </button>
                 </div>
                 <div className="col-md-6" style={{ textAlign: "end" }}>
                   <h2></h2>
@@ -93,34 +80,30 @@ const HomePage = () => {
               </div>
               <Tabs defaultActiveKey="pb" onChange={onTabChange}>
                 <TabPane tab="Produk Biologi" key="pb">
-                  <TableAbberation
+                  <TableVerification
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Obat" key="ob">
-                  <TableAbberation
+                  <TableVerification
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Bahan Baku Obat" key="bbo">
-                  <TableAbberation
+                  <TableVerification
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Impor dan Ekspor" key="ie">
-                  <TableAbberation
+                  <TableVerification
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
@@ -133,4 +116,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default VerificatorPage;

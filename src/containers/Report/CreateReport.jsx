@@ -93,6 +93,32 @@ const CreateReport = () => {
     }
   };
 
+  const onSubmitForm = (values) => {
+    if (idReport) {
+      let data;
+      if (!values.signature_reporter) {
+        const current = refState.getTrimmedCanvas();
+        data =
+          current.width > 1 || current.height > 1 ? current.toDataURL() : null;
+      }
+      const postData = {
+        ...values,
+        ...(!values.signature_reporter && {
+          signature_reporter: data,
+        }),
+      };
+      setState({ ...postData });
+      updateDataReport(idReport, postData);
+    } else {
+      const current = refState.getTrimmedCanvas();
+      const data =
+        current.width > 1 || current.height > 1 ? current.toDataURL() : null;
+      const postData = { ...values, signature_reporter: data };
+      setState({ ...postData });
+      postDataReport(postData);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -113,17 +139,7 @@ const CreateReport = () => {
                   enableReinitialize
                   initialValues={initial}
                   onSubmit={(values) => {
-                    if (idReport) {
-                      const postData = { ...values };
-                      setState({ ...postData });
-                      updateDataReport(idReport, postData);
-                    } else {
-                      const current = refState.getTrimmedCanvas();
-                      const data = current.toDataURL();
-                      const postData = { ...values, signature_reporter: data };
-                      setState({ ...postData });
-                      postDataReport(postData);
-                    }
+                    onSubmitForm(values);
                   }}
                 >
                   {({ values, errors, touched, handleSubmit, setValues }) => (
