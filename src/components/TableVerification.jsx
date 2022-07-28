@@ -16,7 +16,7 @@ import Tag from "antd/es/tag";
 import Modal from "antd/es/modal";
 import Tooltip from "antd/es/tooltip";
 import ReportAbberation from "./ReportAbberation";
-import { convertDate } from "../utils/index";
+import { convertDate, ImageExist } from "../utils/index";
 
 const confirmDelete = (id, deleteDataReport) => {
   Modal.confirm({
@@ -131,6 +131,8 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 onClick={() => onDetail(val.id)}
               />
             </Tooltip>
+          </div>
+          <div style={{ textAlign: "center" }}>
             <Tooltip placement="top" title="Tindak Lanjuti Laporan">
               <Button
                 type="default"
@@ -190,12 +192,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
           </div>
           <div className="col-md-6">
             <h6 className="font-weight-bold">Pelapor</h6>
-            {dataDetail.signature_reporter && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_reporter &&
+              ImageExist(dataDetail.signature_reporter) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_reporter) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.reporter_name}</p>
             <p>
@@ -207,12 +213,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             <h6 className="font-weight-bold">
               Mengetahui Ka. Sub Dit/Ka. Bid/Kasi
             </h6>
-            {dataDetail.signature_headsub && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_headsub &&
+              ImageExist(dataDetail.signature_headsub) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_headsub) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_headsub}</p>
             <p>
@@ -230,12 +240,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             <h6 className="font-weight-bold">
               Dilakukan Oleh Ka. Sub Dit/Ka. Bid/Kasi
             </h6>
-            {dataDetail.signature_headsub && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_headsub &&
+              ImageExist(dataDetail.signature_headsub) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_headsub) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_headsub || "....."}</p>
             <p>
@@ -249,12 +263,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
               <br />
               Tim Penjaminan Mutu
             </h6>
-            {dataDetail.signature_auditor && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_auditor &&
+              ImageExist(dataDetail.signature_auditor) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_auditor) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.internal_auditor || "....."}</p>
             <p>
@@ -266,12 +284,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             <h6 className="font-weight-bold">
               Koordinalor Tim Mutu/Wakil Ketua MR
             </h6>
-            {dataDetail.signature_head_auditor && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_head_auditor &&
+              ImageExist(dataDetail.signature_head_auditor) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_head_auditor) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_head_auditor || "....."}</p>
             <p>
@@ -281,12 +303,16 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
           </div>
           <div className="col-md-6">
             <h6 className="font-weight-bold">Direktur</h6>
-            {dataDetail.signature_ceo && (
-              <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
-                width="100"
-                alt="ttd-pelapor"
-              />
+            {dataDetail.signature_ceo &&
+              ImageExist(dataDetail.signature_ceo) && (
+                <img
+                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
+                  width="100"
+                  alt="ttd-pelapor"
+                />
+              )}
+            {!ImageExist(dataDetail.signature_ceo) && (
+              <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_ceo || "....."}</p>
             <p>

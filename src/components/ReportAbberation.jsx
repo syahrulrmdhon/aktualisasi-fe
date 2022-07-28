@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Page, Text, Image, View } from "@react-pdf/renderer";
 import { styles } from "./styles";
-import { convertDate } from "../utils/index";
+import { convertDate, ImageExist } from "../utils/index";
 import logo_ri from "../assets/logo_ri.png";
 
 const ReportAbberation = ({ dataDetail }) => (
@@ -183,10 +183,15 @@ const ReportAbberation = ({ dataDetail }) => (
           }}
         >
           <Text style={{ fontSize: 10 }}>Pelapor</Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
-          />
+          {ImageExist(dataDetail.signature_reporter) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
+
           <Text style={{ fontSize: 10 }}>{dataDetail.reporter_name}</Text>
           <Text style={{ fontSize: 10 }}>
             {convertDate(dataDetail.date_signature_reporter, "type")}
@@ -198,10 +203,14 @@ const ReportAbberation = ({ dataDetail }) => (
           <Text style={{ fontSize: 10 }}>
             Mengetahui Ka. Sub Dit./Ka. Bid./Kasi
           </Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-          />
+          {ImageExist(dataDetail.signature_headsub) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
           <Text style={{ fontSize: 10 }}>{dataDetail.name_headsub}</Text>
           <Text style={{ fontSize: 10 }}>
             {dataDetail.date_signature_headsub &&
@@ -292,10 +301,14 @@ const ReportAbberation = ({ dataDetail }) => (
         >
           <Text style={{ fontSize: 10 }}>Dilakukan Oleh</Text>
           <Text style={{ fontSize: 10 }}>Ka. Sub Dit./Ka. Bid./Kasi</Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-          />
+          {ImageExist(dataDetail.signature_headsub) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
           <Text style={{ fontSize: 10 }}>{dataDetail.name_headsub}</Text>
           <Text style={{ fontSize: 10 }}>
             {dataDetail.date_signature_headsub &&
@@ -309,10 +322,14 @@ const ReportAbberation = ({ dataDetail }) => (
           <Text
             style={{ fontSize: 10 }}
           >{`Tim Penjamin Mutu (Auditor Internal)`}</Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
-          />
+          {ImageExist(dataDetail.signature_auditor) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
           <Text style={{ fontSize: 10 }}>{dataDetail.auditor_internal}</Text>
           <Text style={{ fontSize: 10 }}>
             {dataDetail.date_signature_auditor &&
@@ -359,10 +376,14 @@ const ReportAbberation = ({ dataDetail }) => (
           <Text style={{ fontSize: 10 }}>
             Koordintor Tim Mutu/Wakil Ketua MR
           </Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
-          />
+          {ImageExist(dataDetail.signature_head_auditor) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
           <Text style={{ fontSize: 10 }}>{dataDetail.name_head_auditor}</Text>
           <Text style={{ fontSize: 10 }}>
             {dataDetail.date_signature_head_auditor &&
@@ -373,10 +394,14 @@ const ReportAbberation = ({ dataDetail }) => (
           style={{ width: "50%", padding: "5px", borderTop: "1px solid black" }}
         >
           <Text style={{ fontSize: 10 }}>Direktur / Kepala Balai</Text>
-          <Image
-            style={{ width: "100px", paddingLeft: "20%" }}
-            src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
-          />
+          {ImageExist(dataDetail.signature_ceo) ? (
+            <Image
+              style={{ width: "100px", paddingLeft: "20%" }}
+              src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
+            />
+          ) : (
+            <View style={{ height: "80px" }}></View>
+          )}
           <Text style={{ fontSize: 10 }}>{dataDetail.name_ceo}</Text>
           <Text style={{ fontSize: 10 }}>
             {dataDetail.date_signature_ceo &&

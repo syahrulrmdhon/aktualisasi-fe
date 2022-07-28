@@ -66,3 +66,9 @@ export const convertDate = (date, type) => {
 export function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
+
+export const ImageExist = (url) => {
+  var img = new Image();
+  img.src = `${process.env.REACT_APP_HOST}${url}`;
+  return img.height != 0;
+};
