@@ -160,6 +160,7 @@ const TableAbberation = ({
       ),
     },
   ];
+
   return (
     <>
       <div className="mt-2">
@@ -201,14 +202,13 @@ const TableAbberation = ({
           <div className="col-md-6">
             <h6 className="font-weight-bold">Pelapor</h6>
             {dataDetail.signature_reporter &&
-              ImageExist(dataDetail.signature_reporter) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_reporter) && (
+            ImageExist(dataDetail.signature_reporter) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.reporter_name}</p>
@@ -222,14 +222,13 @@ const TableAbberation = ({
               Mengetahui Ka. Sub Dit/Ka. Bid/Kasi
             </h6>
             {dataDetail.signature_headsub &&
-              ImageExist(dataDetail.signature_headsub) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_headsub) && (
+            ImageExist(dataDetail.signature_headsub) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_headsub}</p>
@@ -249,14 +248,13 @@ const TableAbberation = ({
               Dilakukan Oleh Ka. Sub Dit/Ka. Bid/Kasi
             </h6>
             {dataDetail.signature_headsub &&
-              ImageExist(dataDetail.signature_headsub) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_headsub) && (
+            ImageExist(dataDetail.signature_headsub) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_headsub || "....."}</p>
@@ -272,14 +270,13 @@ const TableAbberation = ({
               Tim Penjaminan Mutu
             </h6>
             {dataDetail.signature_auditor &&
-              ImageExist(dataDetail.signature_auditor) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_auditor) && (
+            ImageExist(dataDetail.signature_auditor) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.internal_auditor || "....."}</p>
@@ -293,14 +290,13 @@ const TableAbberation = ({
               Koordinalor Tim Mutu/Wakil Ketua MR
             </h6>
             {dataDetail.signature_head_auditor &&
-              ImageExist(dataDetail.signature_head_auditor) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_head_auditor) && (
+            ImageExist(dataDetail.signature_head_auditor) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_head_auditor || "....."}</p>
@@ -312,14 +308,13 @@ const TableAbberation = ({
           <div className="col-md-6">
             <h6 className="font-weight-bold">Direktur</h6>
             {dataDetail.signature_ceo &&
-              ImageExist(dataDetail.signature_ceo) && (
-                <img
-                  src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
-                  width="100"
-                  alt="ttd-pelapor"
-                />
-              )}
-            {!ImageExist(dataDetail.signature_ceo) && (
+            ImageExist(dataDetail.signature_ceo) ? (
+              <img
+                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
+                width="100"
+                alt="ttd-pelapor"
+              />
+            ) : (
               <div className="mb-4" style={{ height: "80px" }} />
             )}
             <p>{dataDetail.name_ceo || "....."}</p>

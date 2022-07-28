@@ -67,8 +67,8 @@ export function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 
-export const ImageExist = (url) => {
-  var img = new Image();
+export const ImageExist = async (url) => {
+  const img = new Image();
   img.src = `${process.env.REACT_APP_HOST}${url}`;
-  return img.height != 0;
+  return img.height !== 0;
 };
