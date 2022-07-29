@@ -198,6 +198,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
@@ -218,6 +223,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
@@ -244,6 +254,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
@@ -266,6 +281,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
@@ -286,6 +306,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
@@ -304,6 +329,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
                 width="100"
                 alt="ttd-pelapor"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    "https://ik.imagekit.io/vn1tyriomme/Screenshot_47_DnQ9H1lCN.png";
+                }}
               />
             ) : (
               <div className="mb-4" style={{ height: "80px" }} />
