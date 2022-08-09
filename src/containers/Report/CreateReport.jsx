@@ -270,12 +270,12 @@ const CreateReport = () => {
                         ></textarea>
                       </div>
                       <div className="form-group">
-                        <label>Tindakan Perbaikan</label>
+                        <label>Analisis Penyebab</label>
                         <textarea
-                          name="corrective_action"
+                          name="cause_analysis"
                           className="form-control"
                           rows="3"
-                          value={values.corrective_action}
+                          value={values.cause_analysis}
                           onChange={(e) =>
                             setValues({
                               ...values,
@@ -285,12 +285,12 @@ const CreateReport = () => {
                         ></textarea>
                       </div>
                       <div className="form-group">
-                        <label>Analisis Penyebab</label>
+                        <label>Tindakan Perbaikan</label>
                         <textarea
-                          name="cause_analysis"
+                          name="corrective_action"
                           className="form-control"
                           rows="3"
-                          value={values.cause_analysis}
+                          value={values.corrective_action}
                           onChange={(e) =>
                             setValues({
                               ...values,
