@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import CanvasSignature from "react-signature-canvas";
 import { postReport, getReport, updateReport } from "../../utils/report";
+import * as Yup from "yup";
 
 const Signature = React.forwardRef((props, ref) => (
   <CanvasSignature
@@ -36,6 +37,18 @@ const CreateReport = () => {
     type_abberation: dataDetail.type_abberation || "",
     bussiness_process: dataDetail.bussiness_process || "",
     facility_name: dataDetail.facility_name || "",
+  });
+
+  const ReportSchema = Yup.object().shape({
+    reporter_name: Yup.string().required("Required"),
+    abberation_id: Yup.string().required("Required"),
+    detail_abberation: Yup.string().required("Required"),
+    corrective_action: Yup.string().required("Required"),
+    cause_analysis: Yup.string().required("Required"),
+    preventive_measure: Yup.string().required("Required"),
+    type_abberation: Yup.string().required("Required"),
+    bussiness_process: Yup.string().required("Required"),
+    facility_name: Yup.string().required("Required"),
   });
 
   const getDataReport = async (idReport) => {
@@ -138,6 +151,7 @@ const CreateReport = () => {
                 <Formik
                   enableReinitialize
                   initialValues={initial}
+                  validationSchema={ReportSchema}
                   onSubmit={(values) => {
                     onSubmitForm(values);
                   }}
@@ -161,6 +175,11 @@ const CreateReport = () => {
                                 })
                               }
                             />
+                            {errors.reporter_name && touched.reporter_name && (
+                              <p class="text-danger">
+                                Nama Pelapor wajib diisi
+                              </p>
+                            )}
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -179,6 +198,11 @@ const CreateReport = () => {
                                 })
                               }
                             />
+                            {errors.abberation_id && touched.abberation_id && (
+                              <p class="text-danger">
+                                Nomor Penyimpangan wajib diisi
+                              </p>
+                            )}
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -196,6 +220,12 @@ const CreateReport = () => {
                                 });
                               }}
                             />
+                            {errors.date_abberation &&
+                              touched.date_abberation && (
+                                <p class="text-danger">
+                                  Tanggal Penyimpangan wajib diisi
+                                </p>
+                              )}
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -214,6 +244,12 @@ const CreateReport = () => {
                                 })
                               }
                             />
+                            {errors.bussiness_process &&
+                              touched.bussiness_process && (
+                                <p class="text-danger">
+                                  Bisnis Proses Penyimpangan wajib diisi
+                                </p>
+                              )}
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -232,6 +268,12 @@ const CreateReport = () => {
                                 })
                               }
                             />
+                            {errors.type_abberation &&
+                              touched.type_abberation && (
+                                <p class="text-danger">
+                                  Jenis Penyimpangan wajib diisi
+                                </p>
+                              )}
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -250,6 +292,11 @@ const CreateReport = () => {
                                 })
                               }
                             />
+                            {errors.facility_name && touched.facility_name && (
+                              <p class="text-danger">
+                                Nama Sarana / Nama Perusahaan wajib diisi
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -268,6 +315,12 @@ const CreateReport = () => {
                             })
                           }
                         ></textarea>
+                        {errors.detail_abberation &&
+                          touched.detail_abberation && (
+                            <p class="text-danger">
+                              Rincian Penyimpangan wajib diisi
+                            </p>
+                          )}
                       </div>
                       <div className="form-group">
                         <label>Analisis Penyebab</label>
@@ -283,6 +336,11 @@ const CreateReport = () => {
                             })
                           }
                         ></textarea>
+                        {errors.cause_analysis && touched.cause_analysis && (
+                          <p class="text-danger">
+                            Analisis Penyebab wajib diisi
+                          </p>
+                        )}
                       </div>
                       <div className="form-group">
                         <label>Tindakan Perbaikan</label>
@@ -298,6 +356,12 @@ const CreateReport = () => {
                             })
                           }
                         ></textarea>
+                        {errors.corrective_action &&
+                          touched.corrective_action && (
+                            <p class="text-danger">
+                              Tindakan Perbaikan wajib diisi
+                            </p>
+                          )}
                       </div>
                       <div className="form-group">
                         <label>Tindakan Pencegahan</label>
@@ -313,6 +377,12 @@ const CreateReport = () => {
                             })
                           }
                         ></textarea>
+                        {errors.preventive_measure &&
+                          touched.preventive_measure && (
+                            <p class="text-danger">
+                              Tindakan Perbaikan wajib diisi
+                            </p>
+                          )}
                       </div>
                       {!values.signature_reporter && (
                         <>
