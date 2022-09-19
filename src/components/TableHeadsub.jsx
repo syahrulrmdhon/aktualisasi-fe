@@ -30,12 +30,7 @@ const confirmDelete = (id, deleteDataReport) => {
   });
 };
 
-const TableAbberation = ({
-  dataReport,
-  loadingReport,
-  deleteDataReport,
-  group,
-}) => {
+const TableHeadsub = ({ dataReport, loadingReport, group }) => {
   const history = useNavigate();
   const [visible, setVisible] = useState(false);
   const [dataDetail, setDataDetail] = useState({});
@@ -81,22 +76,8 @@ const TableAbberation = ({
       key: "signed",
       render: (val) => (
         <>
-          <Tag
-            color={
-              val.signature_headsub &&
-              val.signature_auditor &&
-              val.signature_head_auditor &&
-              val.signature_ceo
-                ? "green"
-                : "volcano"
-            }
-          >
-            {val.signature_headsub &&
-            val.signature_auditor &&
-            val.signature_head_auditor &&
-            val.signature_ceo
-              ? "Signed"
-              : "Not Signed"}
+          <Tag color={val.signature_headsub ? "green" : "volcano"}>
+            {val.signature_headsub ? "Signed" : "Not Signed"}
           </Tag>
         </>
       ),
@@ -128,7 +109,8 @@ const TableAbberation = ({
                 />
               </Tooltip>
             )}
-
+          </div>
+          <div>
             <Tooltip placement="top" title="Lihat Detail">
               <Button
                 type="default"
@@ -139,21 +121,18 @@ const TableAbberation = ({
             </Tooltip>
           </div>
           <div>
-            <Tooltip placement="top" title="Edit Laporan">
+            <Tooltip placement="top" title="Tindak Lanjuti Laporan">
               <Button
                 type="default"
-                className="btn btn-success mb-2 mr-2"
+                className="btn btn-success mt-2"
+                style={{
+                  backgroundColor: "#28a745",
+                  borderColor: "#28a745",
+                  color: "#fff",
+                }}
                 shape="round"
-                onClick={() => history(`/add-report/${group}/${val.id}`)}
+                onClick={() => history(`/headsub-followup/${group}/${val.id}`)}
                 icon={<EditOutlined />}
-              />
-            </Tooltip>
-            <Tooltip placement="top" title="Hapus Laporan">
-              <Button
-                type="danger"
-                shape="round"
-                icon={<DeleteOutlined />}
-                onClick={() => confirmDelete(val.id, deleteDataReport)}
               />
             </Tooltip>
           </div>
@@ -161,7 +140,6 @@ const TableAbberation = ({
       ),
     },
   ];
-
   return (
     <>
       <div className="mt-2">
@@ -377,4 +355,4 @@ const TableAbberation = ({
   );
 };
 
-export default TableAbberation;
+export default TableHeadsub;

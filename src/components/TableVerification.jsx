@@ -15,6 +15,7 @@ import Button from "antd/es/button";
 import Tag from "antd/es/tag";
 import Modal from "antd/es/modal";
 import Tooltip from "antd/es/tooltip";
+import Skeleton from "antd/es/skeleton";
 import ReportAbberation from "./ReportAbberation";
 import { convertDate, ImageExist } from "../utils/index";
 
@@ -75,22 +76,8 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
       key: "signed",
       render: (val) => (
         <>
-          <Tag
-            color={
-              val.signature_headsub &&
-              val.signature_auditor &&
-              val.signature_head_auditor &&
-              val.signature_ceo
-                ? "green"
-                : "volcano"
-            }
-          >
-            {val.signature_headsub &&
-            val.signature_auditor &&
-            val.signature_head_auditor &&
-            val.signature_ceo
-              ? "Signed"
-              : "Not Signed"}
+          <Tag color={val.signature_auditor ? "green" : "volcano"}>
+            {val.signature_auditor ? "Signed" : "Not Signed"}
           </Tag>
         </>
       ),
@@ -122,7 +109,8 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
                 />
               </Tooltip>
             )}
-
+          </div>
+          <div>
             <Tooltip placement="top" title="Lihat Detail">
               <Button
                 type="default"
@@ -132,18 +120,18 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
               />
             </Tooltip>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div>
             <Tooltip placement="top" title="Tindak Lanjuti Laporan">
               <Button
                 type="default"
-                className="btn btn-success mb-2 ml-2"
+                className="btn btn-success mt-2"
                 style={{
                   backgroundColor: "#28a745",
                   borderColor: "#28a745",
                   color: "#fff",
                 }}
                 shape="round"
-                onClick={() => history(`/verif/${group}/${val.id}`)}
+                onClick={() => history(`/audit-followup/${group}/${val.id}`)}
                 icon={<EditOutlined />}
               />
             </Tooltip>
@@ -155,7 +143,11 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
   return (
     <>
       <div className="mt-2">
-        <Table columns={columns} dataSource={dataReport} />
+        {loadingReport ? (
+          <Skeleton />
+        ) : (
+          <Table columns={columns} dataSource={dataReport} />
+        )}
       </div>
       <Modal
         title="Detail Laporan Penyimpangan"
@@ -195,7 +187,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_reporter &&
             ImageExist(dataDetail.signature_reporter) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_reporter}`}
+                src={`${dataDetail.signature_reporter.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {
@@ -220,7 +212,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_headsub &&
             ImageExist(dataDetail.signature_headsub) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                src={`${dataDetail.signature_headsub.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {
@@ -244,6 +236,10 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             </h6>
             <p>{dataDetail.action_recomendation || "....."}</p>
           </div>
+          <div className="col-md-12">
+            <h6 className="font-weight-bold">Catatan</h6>
+            <p>{dataDetail.notes_headsub || "....."}</p>
+          </div>
           <div className="col-md-6">
             <h6 className="font-weight-bold">
               Dilakukan Oleh Ka. Sub Dit/Ka. Bid/Kasi
@@ -251,7 +247,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_headsub &&
             ImageExist(dataDetail.signature_headsub) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_headsub}`}
+                src={`${dataDetail.signature_headsub.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {
@@ -278,7 +274,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_auditor &&
             ImageExist(dataDetail.signature_auditor) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_auditor}`}
+                src={`${dataDetail.signature_auditor.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {
@@ -303,7 +299,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_head_auditor &&
             ImageExist(dataDetail.signature_head_auditor) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_head_auditor}`}
+                src={`${dataDetail.signature_head_auditor.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {
@@ -326,7 +322,7 @@ const TableVerification = ({ dataReport, loadingReport, group }) => {
             {dataDetail.signature_ceo &&
             ImageExist(dataDetail.signature_ceo) ? (
               <img
-                src={`${process.env.REACT_APP_HOST}${dataDetail.signature_ceo}`}
+                src={`${dataDetail.signature_ceo.pathUrl}`}
                 width="100"
                 alt="ttd-pelapor"
                 onError={({ currentTarget }) => {

@@ -4,14 +4,14 @@ import message from "antd/es/message";
 import Select from "antd/es/select";
 import Tabs from "antd/es/tabs";
 import Navbar from "../../components/Navbar";
-import TableAbberation from "../../components/TableAbberation";
-import { getListReport, deleteReport } from "../../utils/report";
+import TableHeadsub from "../../components/TableHeadsub";
+import { getListReport } from "../../utils/headsub";
 
-const HomePage = () => {
+const HeadsubPage = () => {
   const [dataReport, setDataReport] = useState([]);
+  const [loadingReport, setLoadingReport] = useState(false);
   const [username] = useState(localStorage.getItem("username"));
   const [token] = useState(localStorage.getItem("token"));
-  const [loadingReport, setLoadingReport] = useState(false);
   const [year, setYear] = useState({
     value: new Date().getFullYear(),
     label: new Date().getFullYear(),
@@ -32,16 +32,6 @@ const HomePage = () => {
       setLoadingReport(false);
       localStorage.clear();
       window.location.href = "/login";
-    }
-  };
-  const deleteDataReport = async (id) => {
-    const res = await deleteReport(id, token);
-    if (res.status === 200) {
-      setDataReport(dataReport.filter((e) => e.id !== id));
-      message.success(res.data.message);
-    } else if (res.status === 401) {
-      localStorage.clear();
-      history.push("/login");
     }
   };
 
@@ -72,12 +62,6 @@ const HomePage = () => {
               <div className="row">
                 <div className="col-md-6">
                   <h2>Daftar Penyimpangan {year.label}</h2>
-                  <button
-                    onClick={() => history(`/add-report/${group}`)}
-                    className="btn btn-primary"
-                  >
-                    Buat Laporan
-                  </button>
                 </div>
                 <div className="col-md-6" style={{ textAlign: "end" }}>
                   <h2></h2>
@@ -103,34 +87,30 @@ const HomePage = () => {
               </div>
               <Tabs defaultActiveKey="pb" onChange={onTabChange}>
                 <TabPane tab="Produk Biologi" key="pb">
-                  <TableAbberation
+                  <TableHeadsub
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Obat" key="ob">
-                  <TableAbberation
+                  <TableHeadsub
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Bahan Baku Obat" key="bbo">
-                  <TableAbberation
+                  <TableHeadsub
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
                 <TabPane tab="Impor dan Ekspor" key="ie">
-                  <TableAbberation
+                  <TableHeadsub
                     dataReport={dataReport}
                     loadingReport={loadingReport}
-                    deleteDataReport={deleteDataReport}
                     group={group}
                   />
                 </TabPane>
@@ -143,4 +123,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HeadsubPage;
